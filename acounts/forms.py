@@ -75,7 +75,7 @@ class ChangePasswordForm(forms.ModelForm):
     new_password1 = forms.CharField(max_length=20)
     new_password2 = forms.CharField(max_length=20)
 
-    def validate(self, attrs):
+    def validate(self):
         pass1 = self.cleaned_data("new_password1")
         pass2 = self.cleaned_data("new_password2")
 
