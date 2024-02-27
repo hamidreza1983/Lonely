@@ -1,37 +1,23 @@
 from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Profile, CustomeUser, CustomUserCreation
 from .forms import (
     AuthenticationForm,
     ResetPasswordForm,
     ResetForm,
     ChangePasswordForm,
+    CustomUserCreation,
 )
+from .models import CustomeUser
 from django.views.generic import (
     FormView,
     CreateView,
-    UpdateView,
     TemplateView,
 )
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
 from mail_templated import EmailMessage
 from multi_threading import SendEmailWithThreading
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-# from django.views import View
-# from django.core.mail import send_mail
-# from django.contrib.auth.tokens import default_token_generator
-# from django.contrib.auth.models import User
-# from django.utils.encoding import force_bytes
-# from django.utils.http import urlsafe_base64_encode
-# from django.shortcuts import HttpResponse
-# from django.template.loader import render_to_string
-# from django.utils.http import urlsafe_base64_decode
-# from django.utils.encoding import force_text
-
-
 class LoginView(FormView):
     template_name = "registration/login.html"
     form_class = AuthenticationForm
@@ -73,20 +59,6 @@ class SignUpView(CreateView):
         )
         return super().form_invalid(form)
 
-
-class EditProfileView(UpdateView):
-    template_name = "registration/edit_profile.html"
-    model = Profile
-    fields = ["user", "first_name", "last_name", "image", "phone", "address"]
-    success_url = "/"
-
-
-# class ChangePasswordView(FormView, LoginRequiredMixin):
-#     template_name = 'registration/changepassword_form.html'
-#     form_class = ChangePasswordForm
-#     success_url = '/accounts/change-password/done/'
-
-#     def form_valid(self, form):
 
 
 def ChangePasswordView(req):
