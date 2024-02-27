@@ -1,3 +1,3 @@
-from accounts.api.V1.views.CustomeObtainAuthToken import CustomeObtainAuthToken
-from accounts.api.V1.views.DestroyAuthToken import DestroyAuthToken
-from accounts.api.V1.views.is_verified import IsVerifiedView
+from .CustomeAbtainAuthToken import CustomeObtainAuthToken
+from .DestroyAuthToken import DestroyAuthToken
+from .IsVerified import IsVerifiedView
