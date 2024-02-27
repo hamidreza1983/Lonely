@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'accounts',
+    'acounts',
     'order',
     'portfolio',
     'payment',
@@ -136,7 +136,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.CustomeUser'
+AUTH_USER_MODEL = 'acounts.CustomeUser'
 SANDBOX = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
