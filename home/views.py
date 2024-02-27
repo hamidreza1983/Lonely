@@ -4,8 +4,8 @@ from django.shortcuts import render
 
 
 def home(request, *args, **kwargs):
-    return render(request, 'home/index.html')
+    return render(request, "home/index.html")
 
 
 def portfolio_details(request, *args, **kwargs):
-    return render(request, 'home/portfolio-details.html')
+    return render(request, "home/portfolio-details.html")
