@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-from .views import (
+from acounts.api.V1.views import (
     RegistrationView,
     CustomeObtainAuthToken,
     DestroyAuthToken,

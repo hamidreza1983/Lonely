@@ -1,3 +1,3 @@
-from .Portfolio import Portfolio
-from .Category import Category
-from .Client import Client
+from portfolio.models.Portfolio import Portfolio
+from portfolio.models.Category import Category
+from portfolio.models.Client import Client
