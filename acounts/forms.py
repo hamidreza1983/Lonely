@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomeUser, Profile
+from .models import CustomeUser
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from rest_framework.authtoken.models import Token
@@ -28,19 +28,6 @@ class AuthenticationForm(forms.Form):
         ),
     )
 
-
-class EditProfile(forms.ModelForm):
-
-    class Meta:
-        model = Profile
-        fields = [
-            "user",
-            "first_name",
-            "last_name",
-            "image",
-            "phone",
-            "address",
-        ]
 
 
 class ResetPasswordForm(forms.ModelForm):
