@@ -46,6 +46,7 @@ class PortfolioDetailView(DetailView):
 class PaymentView(TemplateView):
     template_name = 'home/cart.html'
 
+
     def post(self, request, *args, **kwargs):
         cart = Cart(request)
         cart.clear()
