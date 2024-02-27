@@ -62,7 +62,7 @@ class SignUpView(CreateView):
 
 
 def ChangePasswordView(req):
-    if req.metod == "GET":
+    if req.method == "GET":
         return render(req, "registration/changepassword_form.html")
     elif req.method == "POST":
         form = ChangePasswordForm(req.POST)
@@ -70,7 +70,7 @@ def ChangePasswordView(req):
         if form.is_valid():
             form.check_old_password(req)
             form.set_new_password(req)
-            return redirect("accounts:hange_password_done")
+            return redirect("accounts:change_password_done")
 
 
 class ChangePasswordDoneView(TemplateView):

@@ -1,8 +1,8 @@
-from customeauthtoken import CustomeAuthTokenSerializer
-from customeobtainpairtoken import CustomObtainPairSerializer
-from passwordchange import PasswordChangeSerializer
-from resetPassword import ResetPasswordSerializer
-from resetPasswordEmail import ResetPasswordEmailSerializer
-from resendEmail import ResendEmailSerializer
-from registration import RegisterationSerializer
+from .customeauthtoken import CustomeAuthTokenSerializer
+from .customeobtainpairtoken import CustomObtainPairSerializer
+from .passwordchange import PasswordChangeSerializer
+from .resetPassword import ResetPasswordSerializer
+from .resetPasswordEmail import ResetPasswordEmailSerializer
+from .resendEmail import ResendEmailSerializer
+from .registration import RegisterationSerializer
 
