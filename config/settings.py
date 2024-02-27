@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "order",
     "portfolio",
     "payment",
-    #"mail_templated",
+    "mail_templated",
 ]
 
 MIDDLEWARE = [
