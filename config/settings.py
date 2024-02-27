@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+<<<<<<< HEAD
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -55,6 +56,41 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+=======
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'home',
+    'acounts',
+    'order',
+    'portfolio',
+    'payment',
+    "rest_framework",
+    "djoser",
+    "django_filters",
+    "rest_framework.authtoken",
+    "drf_yasg",
+    "rest_framework_simplejwt",
+    "debug_toolbar",
+    "mail_templated",
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+>>>>>>> a2f6af9 (api accounts complete serializer and url and making setting ok)
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -78,6 +114,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
+<<<<<<< HEAD
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -88,6 +125,8 @@ DATABASES = {
     }
 }
 
+=======
+>>>>>>> a2f6af9 (api accounts complete serializer and url and making setting ok)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -126,12 +165,15 @@ USE_TZ = True
 STATIC_URL = "static/"
 MEDIA_URL = "media/"
 
+<<<<<<< HEAD
 STATIC_ROOT = BASE_DIR / "/static"
 MEDIA_ROOT = BASE_DIR / "media"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+=======
+>>>>>>> a2f6af9 (api accounts complete serializer and url and making setting ok)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -141,6 +183,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "acounts.CustomeUser"
 SANDBOX = True
 
+<<<<<<< HEAD
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 EMAIL_HOST = "smtp4dev"
@@ -148,3 +191,13 @@ EMAIL_USE_TLS = False
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
+=======
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ]
+}
+>>>>>>> a2f6af9 (api accounts complete serializer and url and making setting ok)
