@@ -1,29 +1,38 @@
 from django.db import models
 import datetime
-# Create your models here.
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    def str(self):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
         return self.name
-    
+
+
+class Client(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
 
 class Portfolio(models.Model):
-    image = models.ImageField(upload_to='portfolio',default='default.png')
-    title = models.CharField(max_length=90)
-    category = models.ManyToManyField(Category)
+    title = models.CharField(max_length=50)
     content = models.TextField()
-    price = models.IntegerField(default=0)
+    description = models.TextField()
+    description_text = models.TextField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    description = models.TextField()
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="portfolio", default="portfolio.jpg")
     project_date = models.DateTimeField(default=datetime.datetime.now())
-    project_url= models.CharField(max_length=90)
-    client = models.CharField(max_length=100)
+    project_url = models.CharField(default="www.example.com")
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
-        ordering = ('-created_date',)
+        ordering = ("-created_date",)
 
     def __str__(self):
         return self.title

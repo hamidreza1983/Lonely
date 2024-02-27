@@ -7,7 +7,7 @@ from ...models import *
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView, ListCreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
+from rest_framework.generics import GenericAPIView , ListAPIView, ListCreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
 from rest_framework.mixins import CreateModelMixin, DestroyModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework import viewsets
 from .permission import IsAdminOrReadOnly
@@ -15,24 +15,61 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .paginator import CustomePaginate
 
-
-
-
-class PortfolioView(viewsets.ModelViewSet):
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+class PortfolioDetailView(GenericAPIView, RetrieveModelMixin, DestroyModelMixin, UpdateModelMixin):   
+    #queryset = Course.objects.filter(status=True)
     serializer_class = PortfolioSerializer
-    queryset =  Portfolio.objects.filter(status=True)
-    permission_classes = [IsAdminOrReadOnly]
-    filterset_fields = ['category', 'title']
-    search_fields = ['content', 'category__name']
-    ordering_fields = ['created_date']
-    pagination_class = CustomePaginate
 
+    def get_queryset(self):
+        return Portfolio.objects.filter(status=True)
 
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
-class CategoryView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    serializer_class = CategorySerializer
-    queryset = Category.objects.all()
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
 
+class PortfolioListView(GenericAPIView, ListModelMixin, CreateModelMixin):   
+    #queryset = Course.objects.filter(status=True)
+    serializer_class = PortfolioApiSerializer
 
+    def get_queryset(self):
+        return Portfolio.objects.filter(status=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class CategoryDetailView(GenericAPIView, RetrieveModelMixin, DestroyModelMixin, UpdateModelMixin):   
+    #queryset = Course.objects.filter(status=True)
+    serializer_class = PortfolioApiSerializer
+
+    def get_queryset(self):
+        return Portfolio.objects.filter(status=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
+class CategoryListView(GenericAPIView, ListModelMixin, CreateModelMixin):   
+    #queryset = Course.objects.filter(status=True)
+    serializer_class = PortfolioApiSerializer
+
+    def get_queryset(self):
+        return Portfolio.objects.filter(status=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
