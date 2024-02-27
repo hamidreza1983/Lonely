@@ -1,9 +1,13 @@
 from rest_framework.generics import GenericAPIView
-from .serializer import *
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.tokens import AccessToken
+from acounts.models import CustomeUser
+
 class IsVerifiedView(GenericAPIView):
+    '''
+    this class check user is verified or not
+    '''
     def get(self, request, *args, **kwargs):
         try:
             user_data = AccessToken(kwargs.get("token"))

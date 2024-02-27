@@ -5,29 +5,38 @@ from .cart import Cart
 
 
 class PortfolioListView(ListView):
-    
+    """This class represents a ListView for displaying portfolios.
+    It sets the template name to 'home/index.html', specifies the context object name as 'portfolios',
+    and sets pagination to display 9 portfolios per page."""
+
     template_name = 'home/index.html'
     context_object_name = 'portfolios'
     paginate_by = 9
 
     def get_queryset(self):
+        """"Returns the queryset of portfolios based on the category specified in the URL kwargs."""
         if self.kwargs.get('cat'):
             return Portfolio.objects.filter(category__name=self.kwargs.get('cat'))
         else:
             return Portfolio.objects.filter(status=True) 
     def post(self, request, *args, **kwargs):
+        """Handles POST requests by delegating the handling to PortfolioDetailView."""
         post_detail = PortfolioDetailView()
         return post_detail.post(request,*args,**kwargs)
     
 
     
 class PortfolioDetailView(DetailView):
+    """This class represents a DetailView for displaying details of a portfolio.
+    It sets the model to Portfolio, template name to 'home/portfolio-details.html',
+    and context object name as 'portfolio'."""
     model = Portfolio
     template_name = 'home/portfolio-details.html'
     context_object_name = 'portfolio'
 
     
     def post(self, request, *args, **kwargs):
+        """Handles POST requests for adding or removing portfolios from the cart."""
         cart = Cart(request)
         
         if 'id' in request.POST :
@@ -45,7 +54,6 @@ class PortfolioDetailView(DetailView):
 
 class PaymentView(TemplateView):
     template_name = 'home/cart.html'
-
 
     def post(self, request, *args, **kwargs):
         cart = Cart(request)
