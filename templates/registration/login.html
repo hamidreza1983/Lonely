@@ -33,7 +33,7 @@
       {% csrf_token %}
         <ul class="login-nav">
             <li class="login-nav__item active">
-                <a href="#">Sign In</a>
+                <a href="{% url 'accounts:login' %}">Sign In</a>
             </li>
             <li class="login-nav__item">
                 <a href="{% url 'accounts:signup' %}">Sign Up</a>
@@ -48,13 +48,12 @@
         </label>
         <input name="password" id="login-input-password" class="login__input" type="password" />
 
-        {{captcha}}
         <br>
         <br>
         <br>
         <button type='submit' class="login__submit">Sign in</button>
     </form>
-    <a href="{% url 'password_reset' %}" class="login__forgot">Forgot Password?</a>
+    <a href="{% url 'accounts:reset_password' %}" class="login__forgot">Forgot Password?</a>
 </div>
 <!-- partial -->
     
