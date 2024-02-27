@@ -17,10 +17,6 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-<<<<<<< HEAD
-from django.conf.urls.static import static
-=======
->>>>>>> a2f6af9 (api accounts complete serializer and url and making setting ok)
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import permissions
@@ -29,14 +25,6 @@ from drf_yasg import openapi
 from .setting.development import DEBUG
 
 
-<<<<<<< HEAD
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("home.urls")),
-]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-=======
 schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
@@ -75,4 +63,3 @@ if DEBUG:
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
->>>>>>> a2f6af9 (api accounts complete serializer and url and making setting ok)
