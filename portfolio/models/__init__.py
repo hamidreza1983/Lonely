@@ -1,3 +1,3 @@
-from Portfolio import Portfolio
-from Category import Category
-from Client import Client
+from .Portfolio import Portfolio
+from .Category import Category
+from .Client import Client

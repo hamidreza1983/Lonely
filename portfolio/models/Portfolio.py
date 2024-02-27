@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
-from portfolio.models import Category, Client
+from portfolio.models.Category import Category
+from portfolio.models.Client import Client
 
 
 class Portfolio(models.Model):
