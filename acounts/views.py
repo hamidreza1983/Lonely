@@ -17,7 +17,7 @@ from django.views.generic import (
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
 from mail_templated import EmailMessage
-from multi_threading import SendEmailWithThreading
+from .multi_threading import SendEmailWithThreading
 class LoginView(FormView):
     template_name = "registration/login.html"
     form_class = AuthenticationForm
