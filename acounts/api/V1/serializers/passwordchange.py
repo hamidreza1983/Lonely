@@ -7,12 +7,13 @@ from rest_framework.authtoken.models import Token
 
 
 class PasswordChangeSerializer(serializers.Serializer):
-
+    '''this class worte for change user password'''
     old_password = serializers.CharField(max_length=20)
     new_password1 = serializers.CharField(max_length=20)
     new_password2 = serializers.CharField(max_length=20)
 
     def validate(self, attrs):
+        '''validate user passwords with each other'''
         pass1 = attrs.get("new_password1")
         pass2 = attrs.get("new_password2")
 
@@ -24,7 +25,10 @@ class PasswordChangeSerializer(serializers.Serializer):
         return super().validate(attrs)
 
     def check_old_password(self, request, attrs: dict):
-
+        '''
+        here we check old password and if its equal with 
+        new password rise error
+        '''
         old_pass = attrs.get("old_password")
         pass1 = attrs.get("new_password1")
         user = request.user
@@ -41,6 +45,9 @@ class PasswordChangeSerializer(serializers.Serializer):
         return attrs
 
     def set_new_password(self, request, attrs: dict):
+        '''
+        we set new password if password is valid
+        '''
         pass1 = attrs.get("new_password1")
         user = request.user
         try:
@@ -56,6 +63,7 @@ class PasswordChangeSerializer(serializers.Serializer):
         return attrs
 
     def create_new_token(self, request, attrs: dict):
+        '''here we create a new token'''
         user = request.user
 
         try:
