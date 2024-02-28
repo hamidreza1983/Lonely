@@ -1,14 +1,12 @@
 from rest_framework import serializers
 from ...models import *
-from accounts.models import CustomeUser, Profile
+from acounts.models import CustomeUser
 
 
 class PortfolioApiSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     title = serializers.CharField(max_length=200)
     price = serializers.IntegerField()
-
-
 
     class Meta:
         model = Portfolio
@@ -30,8 +28,7 @@ class PortfolioApiSerializer(serializers.Serializer):
         return rep
     
     def create(self, validated_data):
-        #validated_data['teacher'] = self.context.get('request').user
-        validated_data['content'] = 'for this course'
+        validated_data['content'] = 'for this portfolio'
         return super().create(validated_data)
 
     
