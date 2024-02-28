@@ -1,4 +1,5 @@
-from django.shortcuts import redirect
+from .models import CustomeUser
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import (
@@ -96,6 +97,32 @@ class PasswordResetView(PasswordContextMixin,FormView):
     form_class = PasswordResetForm
     success_url = "/accounts/resetPassword/done/"
     template_name = "registration/resetpassword_form.html"
+
+
+
+    def get_tokens_for_user(self, user):
+
+        refresh = RefreshToken.for_user(user)
+        return str(refresh.access_token) 
+    
+    def form_valid(self, form):
+        email = self.request.get('email')
+        user = get_object_or_404(CustomeUser, email=email)
+
+
+        token = self.get_tokens_for_user(user)
+        
+        message = EmailMessage(
+            "registration/resetpassword_email.html",
+            {"token": token},
+            "admin@hesam.com",
+            to=[email],
+        )
+        email = SendEmailWithThreading(message)
+        email.start()
+        return super().form_valid(form)
+    
+
 
     
 

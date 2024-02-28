@@ -76,6 +76,31 @@ class PasswordChangeForm(SetPasswordForm):
     
 
 
+class ResetpasswordEmail(forms.Form):
+    email = forms.EmailField(
+        label=("Email"),
+        max_length=254,
+        widget=forms.EmailInput(attrs={"autocomplete": "email"}),
+    )
+
+
+
+
+
+class ResetpasswordConfirm(forms.Form):
+
+    new_password1 = forms.CharField(
+        label=("New password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+    )
+
+    new_password2 = forms.CharField(
+        label=("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+    )
+
 
 
 
