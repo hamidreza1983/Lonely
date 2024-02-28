@@ -1,13 +1,8 @@
 from django.urls import path, include
-from home.views import home, portfolio_details
-
+from home.views import HomeView
+from portfolio.views import PortfolioListView
 app_name = 'home'
 urlpatterns = [
-    path("", home, name="home"),
-    path(
-        "portfolio-details/<int:id>",
-        portfolio_details,
-        name="portfolio-dretails",
-    ),
+    path("", HomeView.as_view(),name="home"),
     path("api/V1/", include("home.api.V1.urls")),
 ]

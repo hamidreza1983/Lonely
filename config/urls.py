@@ -41,6 +41,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("home.urls")),
+    path('portfolio',include("portfolio.urls")),
     path("accounts/", include("acounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path('api-auth/', include('rest_framework.urls')),
