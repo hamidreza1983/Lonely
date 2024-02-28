@@ -35,14 +35,18 @@ class RegistrationView(GenericAPIView):
             )
             email = SendEmailWithThreading(message)
             email.start()
-            return Response({"detail": "email sent for your verification...!"})
+            return Response(
+                {"detail": "email sent for your verification...!"}
+            )
 
             # print (serializer.validated_data)
             # data = {
             #     'email': serializer.validated_data['email']
             # }
             # return Response(data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
 
     def get_tokens_for_user(self, user):
 

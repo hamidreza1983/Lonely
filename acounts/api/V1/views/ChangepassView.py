@@ -19,7 +19,9 @@ class ChangePasswordView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.check_old_password(request, serializer.validated_data)
         serializer.set_new_password(request, serializer.validated_data)
-        token = serializer.create_new_token(request, serializer.validated_data)
+        token = serializer.create_new_token(
+            request, serializer.validated_data
+        )
 
         return Response(
             data={

@@ -17,7 +17,9 @@ class IsVerifiedView(GenericAPIView):
             user = get_object_or_404(CustomeUser, id=user_id)
             user.is_verified = True
             user.save()
-            return Response({"detail": "your account verified successfully"})
+            return Response(
+                {"detail": "your account verified successfully"}
+            )
         except:
             return Response(
                 {

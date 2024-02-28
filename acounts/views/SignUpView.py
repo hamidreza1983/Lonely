@@ -17,8 +17,10 @@ class SignUpView(CreateView):
         user = authenticate(email=email, password=password)
         if user is not None:
             login(self.request, user)
-            return redirect("/accounts/edit-profile/%i" % (user.id - 1))
+            return redirect("/")
 
     def form_invalid(self, form):
-        messages.add_message(self.request, messages.ERROR, "Invalid email or password")
+        messages.add_message(
+            self.request, messages.ERROR, "Invalid email or password"
+        )
         return super().form_invalid(form)

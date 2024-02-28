@@ -21,7 +21,9 @@ class RegisterationSerializer(serializers.ModelSerializer):
         password2 = attrs.get("password")
 
         if password1 != password2:
-            raise serializers.ValidationError({"detail": "password dose not confirmed"})
+            raise serializers.ValidationError(
+                {"detail": "password dose not confirmed"}
+            )
 
         try:
 
