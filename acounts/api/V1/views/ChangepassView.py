@@ -6,15 +6,14 @@ from acounts.api.V1.serializer import PasswordChangeSerializer
 
 
 class ChangePasswordView(GenericAPIView):
-    """
+    '''
     we wrote this class for change user password
-    """
-
+    '''
     permission_classes = [IsAuthenticated]
     serializer_class = PasswordChangeSerializer
 
     def post(self, request, *args, **kwargs):
-        """this functions use for check old password and set new password"""
+        '''this functions use for check old password and set new password'''
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.check_old_password(request, serializer.validated_data)

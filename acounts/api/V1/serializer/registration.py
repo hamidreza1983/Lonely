@@ -5,25 +5,22 @@ from acounts.models import CustomeUser
 
 
 class RegisterationSerializer(serializers.ModelSerializer):
-    """
+    '''
     we write this class for Regestring users
-    """
-
+    '''
     password1 = serializers.CharField(max_length=20, write_only=True)
 
     class Meta:
         model = CustomeUser
-        fields = ["email", "username", "password", "password1"]
+        fields = ["phone", "username", "password", "password1"]
 
     def validate(self, attrs):
-        """here we validate user passwords"""
+        '''here we validate user passwords'''
         password1 = attrs.get("password1")
         password2 = attrs.get("password")
 
         if password1 != password2:
-            raise serializers.ValidationError(
-                {"detail": "password dose not confirmed"}
-            )
+            raise serializers.ValidationError({"detail": "password dose not confirmed"})
 
         try:
 

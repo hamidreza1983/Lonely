@@ -5,19 +5,18 @@ from rest_framework.authtoken.models import Token
 
 
 class ResetPasswordSerializer(serializers.Serializer):
-    """
+    '''
     This class worte for reset user password
-    firstable we give new password and if its ok we set as
+    firstable we give new password and if its ok we set as 
     new password
-    """
-
+    '''
     new_password1 = serializers.CharField(max_length=20)
     new_password2 = serializers.CharField(max_length=20)
 
     def validate(self, attrs):
-        """
+        '''
         this function vlidate and check the password with each other
-        """
+        '''
         pass1 = attrs.get("new_password1")
         pass2 = attrs.get("new_password2")
 
@@ -29,11 +28,11 @@ class ResetPasswordSerializer(serializers.Serializer):
         return super().validate(attrs)
 
     def set_new_password(self, request, attrs: dict):
-        """
+        '''
         We write this  function for set new password
         we validate new password with django password validators
         and if its ok we set this password as new password
-        """
+        '''
         pass1 = attrs.get("new_password1")
         user = request.user
         try:
@@ -49,9 +48,9 @@ class ResetPasswordSerializer(serializers.Serializer):
         return attrs
 
     def create_new_token(self, request, attrs: dict):
-        """
+        '''
         We write this function for create new token
-        """
+        '''
         user = request.user
 
         try:
