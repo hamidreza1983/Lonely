@@ -1,4 +1,3 @@
-from home.api.V1.views.CategoryListView import CategoryListView
 from home.api.V1.views.ServiceListView import  ServicesListView
 from home.api.V1.views.ServiceDetailView import ServicesDetailView
 from home.api.V1.views.ResumeListView import ResumeListView

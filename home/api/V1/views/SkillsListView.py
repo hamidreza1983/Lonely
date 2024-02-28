@@ -3,13 +3,16 @@ from rest_framework.mixins import DestroyModelMixin, RetrieveModelMixin,UpdateMo
 from .serializer import SkillsSerializer
 from home.models import Skills
 from rest_framework.permissions import IsAuthenticated
-'''created skils api with post put get and delet
-'''
+
 class SkillsListView (GenericAPIView, RetrieveModelMixin,
                       DestroyModelMixin,
-                      CreateModelMixin, UpdateModelMixin):
+                       CreateModelMixin, UpdateModelMixin):
+    '''
+      this class is skills for api
+      '''
     serializer_class =  SkillsSerializer
     permission_classes = [IsAuthenticated]
+
 
     def get_queryset(self):
         return Skills.objects.filter(status=True)

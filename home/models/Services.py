@@ -7,7 +7,6 @@ class Services(models.Model):
     content = models.TextField()
     description = models.TextField()
     image = models.ImageField(upload_to="services", default="service.jpg")
-    category = models.ForeignKey(Category, on_delete= models.CASCADE) 
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

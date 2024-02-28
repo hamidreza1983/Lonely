@@ -3,9 +3,10 @@ from rest_framework.mixins import CreateModelMixin,ListModelMixin
 from .serializer import  ResumeSerializer
 from home.models import Resume
 from rest_framework.permissions import IsAuthenticated
-'''resume api view with permisson
-'''
+
 class ResumeListView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    '''resume api view with permisson
+    '''
     serializer_class =  ResumeSerializer
     permission_classes = [IsAuthenticated]
 

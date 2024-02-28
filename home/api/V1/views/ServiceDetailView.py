@@ -3,11 +3,12 @@ from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin, CreateMod
 from .serializer import ServiceSerializer
 from home.models import Services
 from rest_framework.permissions import IsAuthenticated
-'''
-this view is for detail services
-'''
+
 class ServicesDetailView(GenericAPIView, CreateModelMixin,
                          DestroyModelMixin, UpdateModelMixin):
+    '''
+    this view is for detail services
+    '''
     serializer_class = ServiceSerializer
     permission_classes =[IsAuthenticated]
 
