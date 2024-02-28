@@ -1,0 +1,12 @@
+from rest_framework.generics import GenericAPIView 
+from rest_framework.mixins import CreateModelMixin,ListModelMixin
+from .serializer import ServiceSerializer
+from home.models import Services
+
+
+class ServicesListView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        return Services.objects.filter(status=True)
+ 
