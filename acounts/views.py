@@ -7,7 +7,8 @@ from .forms import (
     # ResetForm,
     # ChangePasswordForm,
     CustomUserCreation,
-    PasswordChangeForm
+    PasswordChangeForm, 
+    PasswordResetForm
 )
 from .models import CustomeUser
 from django.views.generic import (
@@ -115,9 +116,40 @@ class ChangePasswordDoneView(TemplateView):
 #         #     login(self.request, user)
 #         #     return super().form_valid(form)
 
+class PasswordResetView(FormView):
+    email_template_name = "registration/password_reset_email.html"
+    extra_email_context = None
+    form_class = PasswordResetForm
+    from_email = None
+    html_email_template_name = None
+    subject_template_name = "registration/password_reset_subject.txt"
+    success_url = "/accounts/resetPassword/done/"
+    template_name = "registration/resetpassword_form.html"
+    title = ("Password reset")
+    token_generator = default_token_generator
 
-# class ResetPasswordDoneView(TemplateView):
-#     template_name = "registration/resetpassword_done.html"
+    # @method_decorator(csrf_protect)
+    # def dispatch(self, *args, **kwargs):
+    #     return super().dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        opts = {
+            "use_https": self.request.is_secure(),
+            "token_generator": self.token_generator,
+            "from_email": self.from_email,
+            "email_template_name": self.email_template_name,
+            "subject_template_name": self.subject_template_name,
+            "request": self.request,
+            "html_email_template_name": self.html_email_template_name,
+            "extra_email_context": self.extra_email_context,
+        }
+        form.save(**opts)
+        return super().form_valid(form)
+
+
+
+class ResetPasswordDoneView(TemplateView):
+    template_name = "registration/resetpassword_done.html"
 
 
 # def ResetView(req, token):
@@ -143,5 +175,5 @@ class ChangePasswordDoneView(TemplateView):
 #     #     password = kwargs.get('password')
 
 
-# class ResetDoneView(TemplateView):
-#     template_name = "registration/resetpassword_complete.html"
+class ResetDoneView(TemplateView):
+    template_name = "registration/resetpassword_complete.html"
