@@ -178,6 +178,10 @@ class PasswordResetConfirmView(FormView):
             raise ValueError({"detail": list(e.messages)})
         
         user.set_password(password1)
+        user.save()
+
+
+        
         return super().form_valid(form)
     
    
