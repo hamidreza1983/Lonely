@@ -33,10 +33,10 @@
       {% csrf_token %}
         <ul class="login-nav">
             <li class="login-nav__item active">
-                <a href="{% url 'accounts:login' %}">Sign In</a>
+                <a href="{% url 'acounts:login' %}">Sign In</a>
             </li>
             <li class="login-nav__item">
-                <a href="{% url 'accounts:signup' %}">Sign Up</a>
+                <a href="{% url 'acounts:signup' %}">Sign Up</a>
             </li>
         </ul>
         <label for="login-input-user" class="login__label">
@@ -53,7 +53,7 @@
         <br>
         <button type='submit' class="login__submit">Sign in</button>
     </form>
-    <a href="{% url 'accounts:reset_password' %}" class="login__forgot">Forgot Password?</a>
+    <a href="#" class="login__forgot">Forgot Password?</a>
 </div>
 <!-- partial -->
     

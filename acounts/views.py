@@ -3,9 +3,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import (
     AuthenticationForm,
-    ResetPasswordForm,
-    ResetForm,
-    ChangePasswordForm,
+    # ResetPasswordForm,
+    # ResetForm,
+    # ChangePasswordForm,
     CustomUserCreation,
     PasswordChangeForm
 )
@@ -80,6 +80,17 @@ class ChangePasswordView(FormView):
     form_class = PasswordChangeForm
     success_url = "/accounts/change-password/done/"
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+    
+    def form_valid(self, form):
+        form.save()
+        # Updating the password logs out all other sessions for the user
+        # except the current one.
+        return super().form_valid(form)
+
     
 
 
@@ -89,63 +100,63 @@ class ChangePasswordDoneView(TemplateView):
     template_name = "registration/changepassword_done.html"
 
 
-class ResetPasswordView(FormView):
-    template_name = "registration/resetpassword_form.html"
-    form_class = ResetPasswordForm
-    success_url = "/accounts/ResetPassword/done/"
+# class ResetPasswordView(FormView):
+#     template_name = "registration/resetpassword_form.html"
+#     form_class = ResetPasswordForm
+#     success_url = "/accounts/ResetPassword/done/"
 
-    def form_valid(self, form):
-        email = self.request.POST.get("email")
-        user = get_object_or_404(CustomeUser, email=email)
-        if user is not None:
-            token = self.get_tokens_for_user(user)
-            message = EmailMessage(
-                "registration/resetpassword_email.html",
-                {"token": token},
-                "admin@hesam.com",
-                to=email,
-            )
-            email = SendEmailWithThreading(message)
-            email.start()
+#     def form_valid(self, form):
+#         email = self.request.POST.get("email")
+#         user = get_object_or_404(CustomeUser, email=email)
+#         if user is not None:
+#             token = self.get_tokens_for_user(user)
+#             message = EmailMessage(
+#                 "registration/resetpassword_email.html",
+#                 {"token": token},
+#                 "admin@hesam.com",
+#                 to=email,
+#             )
+#             email = SendEmailWithThreading(message)
+#             email.start()
 
-    def get_tokens_for_user(self, user):
+#     def get_tokens_for_user(self, user):
 
-        refresh = RefreshToken.for_user(user)
-        return str(refresh.access_token)
+#         refresh = RefreshToken.for_user(user)
+#         return str(refresh.access_token)
 
-        # password = self.request.POST.get('password')
-        # user = authenticate(email=email, password=password)
-        # if user is not None:
-        #     login(self.request, user)
-        #     return super().form_valid(form)
-
-
-class ResetPasswordDoneView(TemplateView):
-    template_name = "registration/resetpassword_done.html"
+#         # password = self.request.POST.get('password')
+#         # user = authenticate(email=email, password=password)
+#         # if user is not None:
+#         #     login(self.request, user)
+#         #     return super().form_valid(form)
 
 
-def ResetView(req, token):
-    if req.method == "Get":
-        return render(req, "registration/resetpassword_confirm.html")
-
-    elif req.method == "Post":
-        form = ResetForm(req.POST)
-        token = req.POST.get("token")
-        user_data = AccessToken(token)
-        user_id = user_data["user_id"]
-        user = get_object_or_404(CustomeUser, id=user_id)
-        if form.is_valid():
-            pass1 = form.cleaned_data["password1"]
-            user.set_password(pass1)
-            user.save()
-            return redirect("acoounts:reset_done")
-
-    # def post(self, request, *args, **kwargs):
-    #     user_data = AccessToken(kwargs.get("token"))
-    #     user_id = user_data["user_id"]
-    #     user = get_object_or_404(CustomeUser, id=user_id)
-    #     password = kwargs.get('password')
+# class ResetPasswordDoneView(TemplateView):
+#     template_name = "registration/resetpassword_done.html"
 
 
-class ResetDoneView(TemplateView):
-    template_name = "registration/resetpassword_complete.html"
+# def ResetView(req, token):
+#     if req.method == "Get":
+#         return render(req, "registration/resetpassword_confirm.html")
+
+#     elif req.method == "Post":
+#         form = ResetForm(req.POST)
+#         token = req.POST.get("token")
+#         user_data = AccessToken(token)
+#         user_id = user_data["user_id"]
+#         user = get_object_or_404(CustomeUser, id=user_id)
+#         if form.is_valid():
+#             pass1 = form.cleaned_data["password1"]
+#             user.set_password(pass1)
+#             user.save()
+#             return redirect("acoounts:reset_done")
+
+#     # def post(self, request, *args, **kwargs):
+#     #     user_data = AccessToken(kwargs.get("token"))
+#     #     user_id = user_data["user_id"]
+#     #     user = get_object_or_404(CustomeUser, id=user_id)
+#     #     password = kwargs.get('password')
+
+
+# class ResetDoneView(TemplateView):
+#     template_name = "registration/resetpassword_complete.html"
