@@ -2,9 +2,8 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import AccessToken
-from acounts.api.V1.serializer import (
-    ResetPasswordSerializer
-)              
+from acounts.api.V1.serializer import ResetPasswordSerializer
+
 
 class ResetPasswordView(GenericAPIView):
     serializer_class = ResetPasswordSerializer

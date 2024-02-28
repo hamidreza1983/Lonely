@@ -12,7 +12,7 @@ from acounts.api.V1.views import (
     ResendEmailView,
     ResetPasswordEmailView,
     ResetPasswordView,
-    Customejwtview
+    Customejwtview,
 )
 
 

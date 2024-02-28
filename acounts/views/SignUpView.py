@@ -5,7 +5,6 @@ from ..forms import CustomUserCreation
 from django.views.generic import CreateView
 
 
-
 class SignUpView(CreateView):
     template_name = "registration/signup.html"
     form_class = CustomUserCreation
@@ -21,7 +20,5 @@ class SignUpView(CreateView):
             return redirect("/accounts/edit-profile/%i" % (user.id - 1))
 
     def form_invalid(self, form):
-        messages.add_message(
-            self.request, messages.ERROR, "Invalid email or password"
-        )
+        messages.add_message(self.request, messages.ERROR, "Invalid email or password")
         return super().form_invalid(form)

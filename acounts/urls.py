@@ -4,11 +4,11 @@ from acounts.views import (
     LogOutView,
     SignUpView,
     ChangePasswordView,
-    ChangePasswordDoneView, 
+    ChangePasswordDoneView,
     PasswordResetView,
     ResetPasswordDoneView,
     PasswordResetConfirmView,
-    ResetDoneView
+    ResetDoneView,
 )
 
 app_name = "acounts"
@@ -24,12 +24,10 @@ urlpatterns = [
         ChangePasswordDoneView.as_view(),
         name="change_password_done",
     ),
+    path("resetPassword/", PasswordResetView.as_view(), name="reset_password"),
     path(
-         "resetPassword/",  PasswordResetView.as_view(), name="reset_password"
-    ),
-    path(
-         "resetPassword/done/",
-         ResetPasswordDoneView.as_view(),
+        "resetPassword/done/",
+        ResetPasswordDoneView.as_view(),
         name="reset_password_done",
     ),
     path("reset/<str:token>", PasswordResetConfirmView.as_view(), name="reset"),

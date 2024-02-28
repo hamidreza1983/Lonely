@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from acounts.api.V1.serializer import CustomeAuthTokenSerializer
 
+
 class CustomeObtainAuthToken(ObtainAuthToken):
     serializer_class = CustomeAuthTokenSerializer
 

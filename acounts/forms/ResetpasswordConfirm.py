@@ -1,5 +1,6 @@
 from django import forms
 
+
 class ResetpasswordConfirm(forms.Form):
 
     new_password1 = forms.CharField(
@@ -13,4 +14,3 @@ class ResetpasswordConfirm(forms.Form):
         strip=False,
         widget=forms.PasswordInput(attrs={"autocomplete": "new_password2"}),
     )
-

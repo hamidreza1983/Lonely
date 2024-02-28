@@ -4,10 +4,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.tokens import AccessToken
 from acounts.models import CustomeUser
 
+
 class IsVerifiedView(GenericAPIView):
-    '''
+    """
     this class check user is verified or not
-    '''
+    """
+
     def get(self, request, *args, **kwargs):
         try:
             user_data = AccessToken(kwargs.get("token"))
@@ -23,4 +25,3 @@ class IsVerifiedView(GenericAPIView):
                     "resend email": "http://127.0.0.1:8080/accounts/api/V1/resend",
                 }
             )
-

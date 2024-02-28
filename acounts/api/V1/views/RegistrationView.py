@@ -10,16 +10,16 @@ from acounts.models import CustomeUser
 
 
 class RegistrationView(GenericAPIView):
-    '''
+    """
     this class is for register users
-    '''
+    """
 
     serializer_class = RegisterationSerializer
 
     def post(self, request, *args, **kwargs):
-        '''
+        """
         this function validate and create a user
-        '''
+        """
         serializer = RegisterationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
