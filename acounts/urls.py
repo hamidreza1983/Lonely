@@ -1,8 +1,4 @@
 from django.urls import path, include
-# from acounts.api.V1.views import (
-#     ChangePasswordView,
-#     ResetPasswordView,
-# )
 from acounts.views import (
     LoginView,
     LogOutView,
