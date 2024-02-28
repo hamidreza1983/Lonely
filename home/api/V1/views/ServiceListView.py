@@ -14,4 +14,8 @@ class ServicesListView(GenericAPIView, ListModelMixin, CreateModelMixin):
 
     def get_queryset(self):
         return Services.objects.filter(status=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
  
