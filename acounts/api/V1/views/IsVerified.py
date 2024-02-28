@@ -4,12 +4,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.tokens import AccessToken
 from acounts.models import CustomeUser
 
-
 class IsVerifiedView(GenericAPIView):
-    """
+    '''
     this class check user is verified or not
-    """
-
+    '''
     def get(self, request, *args, **kwargs):
         try:
             user_data = AccessToken(kwargs.get("token"))
@@ -17,9 +15,7 @@ class IsVerifiedView(GenericAPIView):
             user = get_object_or_404(CustomeUser, id=user_id)
             user.is_verified = True
             user.save()
-            return Response(
-                {"detail": "your account verified successfully"}
-            )
+            return Response({"detail": "your account verified successfully"})
         except:
             return Response(
                 {
