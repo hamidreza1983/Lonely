@@ -1,8 +1,9 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin, CreateModelMixin
-from home.api.V1.serializers import ServiceSerializer
-from home.models import Services
 from rest_framework.permissions import IsAuthenticated
+from home.api.V1.serializer import ServiceSerializer
+from home.models import Services
+
 
 class ServicesDetailView(GenericAPIView, CreateModelMixin,
                          DestroyModelMixin, UpdateModelMixin):
