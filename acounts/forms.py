@@ -5,6 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import get_object_or_404
 
 
 class CustomUserCreation(UserCreationForm):
@@ -34,8 +35,23 @@ class AuthenticationForm(forms.Form):
 class ResetPasswordForm(forms.ModelForm):
     email = forms.EmailField()
 
+    class Meta:
+        model = CustomeUser
+        fields = ["email", "username", "password1", "password2"]
+
+    def is_valid(self) -> bool:
+        email = self.cleaned_data['email']
+        user = get_object_or_404(CustomeUser, email=email)
+        return super().is_valid()
+
+             
+
+
+
+
 
 class ResetForm(forms.ModelForm):
+
     password1 = forms.CharField(
         label=("Password"),
         strip=False,
@@ -50,6 +66,12 @@ class ResetForm(forms.ModelForm):
             attrs={"autocomplete": "current-password"}
         ),
     )
+
+
+    class Meta:
+        model = CustomeUser
+        fields = ["password1", "password2"]
+
 
     def is_valid(self) -> bool:
         password1 = self.cleaned_data["password1"]
@@ -69,12 +91,22 @@ class ResetForm(forms.ModelForm):
             raise forms.ValidationError({"detail": list(e.messages)})
 
         return super().is_valid()
+    
+
+
+
+
 
 
 class ChangePasswordForm(forms.ModelForm):
     old_password = forms.CharField(max_length=20)
     new_password1 = forms.CharField(max_length=20)
     new_password2 = forms.CharField(max_length=20)
+
+
+    class Meta:
+        model = CustomeUser
+        fields = ["old_password","password1", "password2"]
 
     def validate(self):
         pass1 = self.cleaned_data("new_password1")
