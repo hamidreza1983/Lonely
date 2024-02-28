@@ -4,16 +4,18 @@ from .models import CustomeUser
 # from django.contrib.auth.password_validation import validate_password
 # from django.core import exceptions
 from django.contrib.auth.forms import _unicode_ci_compare
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.tokens import AccessToken
+# from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.tokens import AccessToken
 from mail_templated import EmailMessage
 from .multi_threading import SendEmailWithThreading
-from django.contrib.auth import password_validation, get_user_model
+from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.template import loader
+from django.contrib.auth.tokens import default_token_generator
+
 
 class CustomUserCreation(UserCreationForm):
 
@@ -107,12 +109,13 @@ class PasswordResetForm(forms.Form):
         subject = "".join(subject.splitlines())
         body = loader.render_to_string(email_template_name, context)
 
-        email_message = EmailMultiAlternatives(subject, body, from_email, [to_email])
+        email_message = EmailMessage(body, subject, from_email, [to_email])
         if html_email_template_name is not None:
             html_email = loader.render_to_string(html_email_template_name, context)
             email_message.attach_alternative(html_email, "text/html")
 
-        email_message.send()
+        sending = SendEmailWithThreading(email_message)
+        sending.start()
 
     def get_users(self, email):
         """Given an email, return matching user(s) who should receive a reset.

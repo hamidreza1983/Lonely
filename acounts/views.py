@@ -1,11 +1,8 @@
-from django.shortcuts import redirect, get_object_or_404, render
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import (
     AuthenticationForm,
-    # ResetPasswordForm,
-    # ResetForm,
-    # ChangePasswordForm,
     CustomUserCreation,
     PasswordChangeForm, 
     PasswordResetForm
@@ -16,12 +13,25 @@ from django.views.generic import (
     CreateView,
     TemplateView,
 )
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.tokens import AccessToken
-from mail_templated import EmailMessage
-from .multi_threading import SendEmailWithThreading
+# from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.tokens import AccessToken
+# from mail_templated import EmailMessage
+# from .multi_threading import SendEmailWithThreading
 from django.contrib.auth.views import PasswordContextMixin
 from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.tokens import default_token_generator
+from django.views.decorators.debug import sensitive_post_parameters
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.http import HttpResponseRedirect
+from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
+from django.contrib.auth import login as auth_login
+
+
+UserModel = get_user_model()
+
 
 class LoginView(FormView):
     template_name = "registration/login.html"
@@ -179,14 +189,15 @@ class ResetPasswordDoneView(TemplateView):
 #     #     user = get_object_or_404(CustomeUser, id=user_id)
 #     #     password = kwargs.get('password')
 
+INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
 class PasswordResetConfirmView(PasswordContextMixin, FormView):
     form_class = SetPasswordForm
     post_reset_login = False
     post_reset_login_backend = None
     reset_url_token = "set-password"
-    success_url = reverse_lazy("password_reset_complete")
-    template_name = "registration/password_reset_confirm.html"
-    title = _("Enter new password")
+    success_url = "/accounts/reset/done"
+    template_name = "registration/resetpassword_confirm.html"
+    title = ("Enter new password")
     token_generator = default_token_generator
 
     @method_decorator(sensitive_post_parameters())
@@ -258,7 +269,7 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
             context.update(
                 {
                     "form": None,
-                    "title": _("Password reset unsuccessful"),
+                    "title": ("Password reset unsuccessful"),
                     "validlink": False,
                 }
             )
