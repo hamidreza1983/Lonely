@@ -37,5 +37,5 @@ urlpatterns = [
         name="reset_password_done",
     ),
     path("reset/<str:token>", PasswordResetConfirmView.as_view(), name="reset"),
-    path("reset/done", ResetDoneView.as_view(), name="reset_done"),
+    path("reset/done/", ResetDoneView.as_view(), name="reset_done"),
 ]
