@@ -1,9 +1,9 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import DestroyModelMixin, RetrieveModelMixin, UpdateModelMixin
-from ..serializer import PortfolioSerializer
+from ..serializer import PortfolioApiSerializer
 from ....models import Portfolio
 class PortfolioDetailView(GenericAPIView, RetrieveModelMixin, DestroyModelMixin, UpdateModelMixin):   
-    serializer_class = PortfolioSerializer
+    serializer_class = PortfolioApiSerializer
 
     def get_queryset(self):
         return Portfolio.objects.filter(status=True)
