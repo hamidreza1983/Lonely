@@ -7,7 +7,7 @@ class PortfolioListView(ListView):
     It sets the template name to 'home/index.html', specifies the context object name as 'portfolios',
     and sets pagination to display 9 portfolios per page."""
 
-    template_name = 'home/index.html'
+    template_name = 'portfolio/portfolio.html'
     context_object_name = 'portfolios'
     paginate_by = 9
 
