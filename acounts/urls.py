@@ -1,8 +1,13 @@
 from django.urls import path, include
-from .views import *
 from acounts.api.V1.views import (
     ChangePasswordView,
     ResetPasswordView,
+)
+from acounts.views import (
+    LoginView,
+    LogOutView,
+    SignUpView,
+    ChangePasswordDoneView,
 )
 
 app_name = "acounts"
