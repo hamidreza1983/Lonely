@@ -9,7 +9,6 @@ from .forms import (
     ResetpasswordEmail,
     ResetpasswordConfirm
 )
-# from .models import CustomeUser
 from django.views.generic import (
     FormView,
     CreateView,
@@ -107,7 +106,7 @@ class PasswordResetView(FormView):
         return str(refresh.access_token) 
     
     def form_valid(self, form):
-        email = self.request.get('email')
+        email = self.request.POST.get('email')
         user = get_object_or_404(CustomeUser, email=email)
 
 
@@ -157,18 +156,18 @@ class ResetPasswordDoneView(TemplateView):
 
 class PasswordResetConfirmView(FormView):
     form_class = ResetpasswordConfirm
-    success_url = "/accounts/reset/done"
+    success_url = "/accounts/reset/done/"
     template_name = "registration/resetpassword_confirm.html"
 
     def form_valid(self, form):
         user_data = AccessToken(self.kwargs.get("token"))
         user_id = user_data["user_id"]
         user = get_object_or_404(CustomeUser, id=user_id)
-        password1 = self.request.get("new_password1")
-        password2 = self.request.get("new_password2")
+        password1 = self.request.POST.get("new_password1")
+        password2 = self.request.POST.get("new_password2")
 
         if password1 != password2:
-            raise exceptions.ValidationError({"detail": "password dose not confirmed"})
+            raise ValueError({"detail": "password dose not confirmed"})
 
         try:
 
@@ -176,7 +175,7 @@ class PasswordResetConfirmView(FormView):
 
         except exceptions.ValidationError as e:
 
-            raise exceptions.ValidationError({"detail": list(e.messages)})
+            raise ValueError({"detail": list(e.messages)})
         
         user.set_password(password1)
         return super().form_valid(form)
