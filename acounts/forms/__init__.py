@@ -1,0 +1,5 @@
+from acounts.forms.AuthenticationForm import AuthenticationForm
+from acounts.forms.CustomUserCreation import CustomUserCreation
+from acounts.forms.PasswordChangeForm import PasswordChangeForm
+from acounts.forms.ResetpasswordConfirm import ResetpasswordConfirm
+from acounts.forms.ResetpasswordEmail import ResetpasswordEmail
