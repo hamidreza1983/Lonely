@@ -36,7 +36,7 @@
             </div>
             <div class="portfolio-links">
               <a href="{{ port.image.url }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+              <a href="{% url 'portfolio:portfolio_detail' pk=port.id %}" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
           {% endfor %}

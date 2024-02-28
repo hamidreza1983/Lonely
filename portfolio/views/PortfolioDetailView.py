@@ -12,7 +12,7 @@ class PortfolioDetailView(DetailView):
        and context object name as 'portfolio'."""
 
     model = Portfolio
-    template_name = "home/portfolio-details.html"
+    template_name = "portfolio/portfolio-details.html"
     context_object_name = "portfolio"
 
     def post(self, request, *args, **kwargs):
