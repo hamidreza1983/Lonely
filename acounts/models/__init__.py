@@ -1,2 +1,2 @@
-from .CustomeBaseUserManager import CustomeBaseUserManager
-from .CustomeUser import CustomeUser
+from acounts.models.CustomeBaseUserManager import CustomeBaseUserManager
+from acounts.models.CustomeUser import CustomeUser
