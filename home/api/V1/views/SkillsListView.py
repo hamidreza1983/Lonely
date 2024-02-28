@@ -1,6 +1,6 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import DestroyModelMixin, RetrieveModelMixin,UpdateModelMixin, CreateModelMixin
-from .serializer import SkillsSerializer
+from home.api.V1.serializers import SkillsSerializer
 from home.models import Skills
 from rest_framework.permissions import IsAuthenticated
 
