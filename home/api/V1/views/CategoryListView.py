@@ -1,13 +1,15 @@
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import CreateModelMixin, ListModelMixin
+from rest_framework.mixins import CreateModelMixin,ListModelMixin
 from .serializer import CategorySerializer
 from home.models import Services
 from rest_framework.permissions import IsAuthenticated
-
-class CategoryListView(GenericAPIView, ListModelMixin, CreateModelMixin):   
+'''category api view in home 
+'''
+class CategoryListView(GenericAPIView, 
+                       ListModelMixin,
+                    CreateModelMixin):   
     serializer_class =  CategorySerializer
     permission_classes = [IsAuthenticated]
-    
     def get_queryset(self):
         return Services.objects.filter(status=True)
 
