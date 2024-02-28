@@ -2,7 +2,6 @@ from django.db import models
 from acounts.models import CustomeUser
 
 
-
 class OrderBy(models.Model):
     user = models.ForeignKey(CustomeUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
@@ -17,14 +16,12 @@ class OrderBy(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-    
     def __str__(self):
-        return f'Order : {self.id}'
-    
+        return f"Order : {self.id}"
+
     def get_total_price(self):
         return sum(item.price * item.quantity for item in self.items.all())
-    
+
     def __iter__(self):
         for item in self.items.all():
             yield item
-
