@@ -168,7 +168,7 @@ class PasswordResetConfirmView(FormView):
         password2 = self.request.get("new_password2")
 
         if password1 != password2:
-            raise ValidationError({"detail": "password dose not confirmed"})
+            raise exceptions.ValidationError({"detail": "password dose not confirmed"})
 
         try:
 
@@ -176,7 +176,7 @@ class PasswordResetConfirmView(FormView):
 
         except exceptions.ValidationError as e:
 
-            raise serializers.ValidationError({"detail": list(e.messages)})
+            raise exceptions.ValidationError({"detail": list(e.messages)})
         
         user.set_password(password1)
         return super().form_valid(form)
