@@ -2,7 +2,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from mail_templated import EmailMessage
 from rest_framework_simplejwt.tokens import RefreshToken
-from acounts.api.V1.serializers import (
+from acounts.api.V1.serializer import (
     ResetPasswordEmailSerializer,
 )              
 from acounts.multi_threading import SendEmailWithThreading

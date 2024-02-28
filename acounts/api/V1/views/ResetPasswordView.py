@@ -2,7 +2,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import AccessToken
-from acounts.api.V1.serializers import (
+from acounts.api.V1.serializer import (
     ResetPasswordSerializer
 )              
 

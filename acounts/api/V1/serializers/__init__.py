@@ -1,7 +1,0 @@
-from acounts.api.V1.serializers.customeauthtoken import CustomeAuthTokenSerializer
-from acounts.api.V1.serializers.customeobtainpairtoken import CustomObtainPairSerializer
-from acounts.api.V1.serializers.passwordchange import PasswordChangeSerializer
-from acounts.api.V1.serializers.resetPassword import ResetPasswordSerializer
-from acounts.api.V1.serializers.resetPasswordEmail import ResetPasswordEmailSerializer
-from acounts.api.V1.serializers.resendEmail import ResendEmailSerializer
-from acounts.api.V1.serializers.registration import RegisterationSerializer
