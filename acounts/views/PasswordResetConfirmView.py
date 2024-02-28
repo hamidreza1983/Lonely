@@ -6,10 +6,12 @@ from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 
+
 class PasswordResetConfirmView(FormView):
-    '''
+    """
     Setting new passwords for user of email
-    '''
+    """
+
     form_class = ResetpasswordConfirm
     success_url = "/accounts/reset/done/"
     template_name = "registration/resetpassword_confirm.html"
@@ -31,12 +33,8 @@ class PasswordResetConfirmView(FormView):
         except exceptions.ValidationError as e:
 
             raise ValueError({"detail": list(e.messages)})
-        
+
         user.set_password(password1)
         user.save()
 
-
-        
         return super().form_valid(form)
-    
-   

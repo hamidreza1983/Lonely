@@ -10,16 +10,16 @@ from acounts.models import CustomeUser
 
 
 class RegistrationView(GenericAPIView):
-    '''
+    """
     this class is for register users
-    '''
+    """
 
     serializer_class = RegisterationSerializer
 
     def post(self, request, *args, **kwargs):
-        '''
+        """
         this function validate and create a user
-        '''
+        """
         serializer = RegisterationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -35,14 +35,18 @@ class RegistrationView(GenericAPIView):
             )
             email = SendEmailWithThreading(message)
             email.start()
-            return Response({"detail": "email sent for your verification...!"})
+            return Response(
+                {"detail": "email sent for your verification...!"}
+            )
 
             # print (serializer.validated_data)
             # data = {
             #     'email': serializer.validated_data['email']
             # }
             # return Response(data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
 
     def get_tokens_for_user(self, user):
 
