@@ -1,5 +1,6 @@
 from .models import Portfolio
 
+
 class Cart:
     def __init__(self, request):
         """
@@ -7,9 +8,9 @@ class Cart:
         """
         self.request = request
         self.session = request.session
-        cart = self.session.get('cart')
+        cart = self.session.get("cart")
         if cart is None:
-            cart = self.session['cart'] = {}
+            cart = self.session["cart"] = {}
         self.cart = cart
 
     def save(self):
@@ -19,29 +20,28 @@ class Cart:
         self.session.modified = True
 
     def add_to_cart_some_quantity(self, product, quantity=1):
-        """"
+        """ "
         Add a product to the Cart over than 1
         """
         if str(product.id) not in self.cart:
-            self.cart[str(product.id)] = {'quantity': quantity}
+            self.cart[str(product.id)] = {"quantity": quantity}
 
         else:
-            self.cart[str(product.id)]['quantity'] += quantity
-        
+            self.cart[str(product.id)]["quantity"] += quantity
 
         self.save()
 
     def add_to_cart_one_quantity(self, product):
-        """"
+        """ "
         Add a product to the Cart just one quantity
         """
 
         if str(product.id) not in self.cart:
-            self.cart[str(product.id)] = {'quantity': 1}
+            self.cart[str(product.id)] = {"quantity": 1}
 
         self.save()
 
-    def delete_from_cart(self,product):
+    def delete_from_cart(self, product):
         """
         Delete a product from the
         """
@@ -56,9 +56,10 @@ class Cart:
         """
         product_ids = self.cart.keys()
         products = Portfolio.objects.filter(id__in=product_ids)
-        cart = self.cart.copy()#generator empty list . use copy for keep base cart
+        cart = self.cart.copy()
+        # generator empty list.use copy for keep base cart
         for product in products:
-            cart[str(product.id)]['product_object'] = product
+            cart[str(product.id)]["product_object"] = product
 
         for item in cart.values():
             yield item
@@ -68,12 +69,12 @@ class Cart:
         Returns the lenght of cart objects
         """
         return len(self.cart.keys())
-    
+
     def clear(self):
         """
         Clear all products
         """
-        del self.session['cart']
+        del self.session["cart"]
         self.save()
 
     def get_total_price_one_quantity(self):
@@ -89,8 +90,9 @@ class Cart:
         Calculate total price if quantity for all products is one
         """
         product_quantity = list(self.cart.values())
-        all_quantity = [i['quantity'] for i in product_quantity]
+        all_quantity = [i["quantity"] for i in product_quantity]
         product_id = list(self.cart.keys())
         products = Portfolio.objects.filter(id__in=product_id)
         price_list = [product.price for product in products]
-        return (sum(price_list[i]*all_quantity[i] for i in range(len(all_quantity))))
+        return sum(price_list[i] *
+                   all_quantity[i] for i in range(len(all_quantity)))
