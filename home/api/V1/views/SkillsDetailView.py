@@ -11,7 +11,7 @@ from home.api.V1.serializer import SkillsSerializer
 from home.models import Skills
 
 
-class SkillsListView (
+class SkillsDetailView (
     GenericAPIView, 
     RetrieveModelMixin,
     DestroyModelMixin,
@@ -30,7 +30,7 @@ class SkillsListView (
         return Skills.objects.all()
 
     def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+        return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
