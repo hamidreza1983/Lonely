@@ -1,6 +1,8 @@
 from ..cart import Cart
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
+
+
 class PaymentView(TemplateView):
     """This class represents a TemplateView for handling payments.
     It sets the template name to 'home/cart.html'.
@@ -12,4 +14,4 @@ class PaymentView(TemplateView):
         """
         cart = Cart(request)
         cart.clear()
-        return redirect(request.path_info)    
+        return redirect(request.path_info)

@@ -10,11 +10,12 @@ class Portfolio(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="portfolio", default="portfolio.jpg")
     project_date = models.DateTimeField()
-    project_url = models.CharField(max_length=100,default="www.example.com")
+    project_url = models.CharField(max_length=100, default="www.example.com")
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     price = models.IntegerField(default=0)
+
     class Meta:
         ordering = ("-created_date",)
 
