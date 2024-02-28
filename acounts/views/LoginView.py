@@ -4,6 +4,9 @@ from django.views.generic import FormView
 
 
 class LoginView(FormView):
+    '''
+    A class for authorazation
+    '''
     template_name = "registration/login.html"
     form_class = AuthenticationForm
     success_url = "/"

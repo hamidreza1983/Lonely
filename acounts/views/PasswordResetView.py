@@ -8,6 +8,9 @@ from ..multi_threading import SendEmailWithThreading
 
 
 class PasswordResetView(FormView):
+    '''
+    This class is for getting gmail for reset password process
+    '''
     form_class = ResetpasswordEmail
     success_url = "/accounts/resetPassword/done/"
     template_name = "registration/resetpassword_form.html"

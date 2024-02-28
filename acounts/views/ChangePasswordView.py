@@ -5,6 +5,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ChangePasswordView(LoginRequiredMixin, FormView):
+    '''
+    This is class for changing password  process
+    '''
+
     template_name = "registration/changepassword_form.html"
     form_class = PasswordChangeForm
     success_url = "/accounts/change-password/done/"
