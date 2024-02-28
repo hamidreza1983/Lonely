@@ -8,7 +8,6 @@ from acounts.api.V1.views import (
     CustomeObtainAuthToken,
     DestroyAuthToken,
     ChangePasswordView,
-    ProfileView,
     IsVerifiedView,
     ResendEmailView,
     ResetPasswordEmailView,
@@ -24,7 +23,6 @@ urlpatterns = [
     path("token/login/", CustomeObtainAuthToken.as_view(), name="login"),
     path("token/logout/", DestroyAuthToken.as_view(), name="logout"),
     path("change-password/", ChangePasswordView.as_view(), name="change-password"),
-    path("profile/", ProfileView.as_view(), name="profile"),
     path("is-verified/<str:token>", IsVerifiedView.as_view(), name="is-verification"),
     path("resend/", ResendEmailView.as_view(), name="resend"),
     path(
