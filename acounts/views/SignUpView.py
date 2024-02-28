@@ -8,8 +8,8 @@ from django.views.generic import CreateView
 class SignUpView(CreateView):
     template_name = "registration/signup.html"
     form_class = CustomUserCreation
-    success_url = "/accounts/login/"  #'registration/login'
-
+    success_url = "/accounts/login/"  
+    '#registration/login'
     def form_valid(self, form):
         form.save()
         email = self.request.POST.get("email")
