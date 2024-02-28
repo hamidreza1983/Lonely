@@ -4,8 +4,10 @@ from .serializer import ServiceSerializer
 from home.models import Services
 from rest_framework.permissions import IsAuthenticated
 
-
 class ServicesListView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    '''api for services with method get 
+    and permissoin classs_isaythenticated
+    '''
     serializer_class = ServiceSerializer
     permission_classes = [IsAuthenticated]
 

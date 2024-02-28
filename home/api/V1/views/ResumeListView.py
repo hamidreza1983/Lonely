@@ -5,6 +5,8 @@ from home.models import Resume
 from rest_framework.permissions import IsAuthenticated
 
 class ResumeListView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    '''resume api view with permisson
+    '''
     serializer_class =  ResumeSerializer
     permission_classes = [IsAuthenticated]
 
