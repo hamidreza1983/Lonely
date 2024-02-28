@@ -1,15 +1,20 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import DestroyModelMixin, RetrieveModelMixin,UpdateModelMixin, CreateModelMixin
-from home.api.V1.serializers import SkillsSerializer
-from home.models import Skills
 from rest_framework.permissions import IsAuthenticated
+from home.api.V1.serializer import SkillsSerializer
+from home.models import Skills
 
-class SkillsListView (GenericAPIView, RetrieveModelMixin,
-                      DestroyModelMixin,
-                       CreateModelMixin, UpdateModelMixin):
+
+class SkillsListView (
+    GenericAPIView, 
+    RetrieveModelMixin,
+    DestroyModelMixin,
+    CreateModelMixin, 
+    UpdateModelMixin
+    ):
     '''
-      this class is skills for api
-      '''
+    this class is skills for api
+    '''
     serializer_class =  SkillsSerializer
     permission_classes = [IsAuthenticated]
 
