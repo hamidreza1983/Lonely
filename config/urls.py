@@ -44,6 +44,7 @@ urlpatterns = [
     path("", include("home.urls")),
     path("accounts/", include("acounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('api-auth/', include('rest_framework.urls')),
     path(
         "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
     ),
