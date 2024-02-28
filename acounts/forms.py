@@ -4,6 +4,7 @@ from .models import CustomeUser
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class CustomUserCreation(UserCreationForm):
@@ -75,7 +76,7 @@ class ChangePasswordForm(forms.ModelForm):
     new_password1 = forms.CharField(max_length=20)
     new_password2 = forms.CharField(max_length=20)
 
-    def validate(self, attrs):
+    def validate(self):
         pass1 = self.cleaned_data("new_password1")
         pass2 = self.cleaned_data("new_password2")
 
@@ -128,3 +129,65 @@ class ChangePasswordForm(forms.ModelForm):
             Token.objects.create(user=user)
         token = Token.objects.get(user=user)
         return token
+
+
+
+
+# class ChangePasswordForm(PasswordChangeForm):
+#     old_password = forms.CharField(max_length=20)
+#     new_password1 = forms.CharField(max_length=20)
+#     new_password2 = forms.CharField(max_length=20)
+
+#     def validate(self):
+#         pass1 = self.cleaned_data("new_password1")
+#         pass2 = self.cleaned_data("new_password2")
+
+#         if pass1 != pass2:
+#             raise forms.ValidationError(
+#                 {"detail": "pass1 and pass2 must be the same"}
+#             )
+
+#         return super().is_validate()
+
+#     def check_old_password(self, request):
+
+#         old_pass = self.cleaned_data("old_password")
+#         pass1 = self.cleaned_data("new_password1")
+#         user = request.user
+#         if not user.check_password(old_pass):
+#             raise forms.ValidationError(
+#                 {"detail": "old_password is not confirmed"}
+#             )
+
+#         if old_pass == pass1:
+#             raise forms.ValidationError(
+#                 {"detail": "old_password can not same as new pass"}
+#             )
+
+#         return self.cleaned_data
+
+#     def set_new_password(self, request):
+#         pass1 = self.cleaned_data("new_password1")
+#         user = request.user
+#         try:
+
+#             validate_password(pass1)
+
+#         except exceptions.ValidationError as e:
+
+#             raise forms.ValidationError({"detail": list(e.messages)})
+
+#         user.set_password(pass1)
+#         user.save()
+#         return self.cleaned_data
+
+#     def create_new_token(self, request):
+#         user = request.user
+
+#         try:
+#             user.auth_token.delete()
+#             Token.objects.create(user=user)
+#         except:
+#             Token.objects.create(user=user)
+#         token = Token.objects.get(user=user)
+#         return token

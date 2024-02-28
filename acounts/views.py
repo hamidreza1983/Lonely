@@ -17,7 +17,7 @@ from django.views.generic import (
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
 from mail_templated import EmailMessage
-from multi_threading import SendEmailWithThreading
+from .multi_threading import SendEmailWithThreading
 class LoginView(FormView):
     template_name = "registration/login.html"
     form_class = AuthenticationForm
@@ -62,7 +62,7 @@ class SignUpView(CreateView):
 
 
 def ChangePasswordView(req):
-    if req.metod == "GET":
+    if req.method == "GET":
         return render(req, "registration/changepassword_form.html")
     elif req.method == "POST":
         form = ChangePasswordForm(req.POST)
@@ -70,7 +70,7 @@ def ChangePasswordView(req):
         if form.is_valid():
             form.check_old_password(req)
             form.set_new_password(req)
-            return redirect("accounts:hange_password_done")
+            return redirect("accounts:change_password_done")
 
 
 class ChangePasswordDoneView(TemplateView):
