@@ -7,6 +7,7 @@ from .forms import (
     ResetForm,
     ChangePasswordForm,
     CustomUserCreation,
+    PasswordChangeForm
 )
 from .models import CustomeUser
 from django.views.generic import (
@@ -61,16 +62,27 @@ class SignUpView(CreateView):
 
 
 
-def ChangePasswordView(req):
-    if req.method == "GET":
-        return render(req, "registration/changepassword_form.html")
-    elif req.method == "POST":
-        form = ChangePasswordForm(req.POST)
 
-        if form.is_valid():
-            form.check_old_password(req)
-            form.set_new_password(req)
-            return redirect("accounts:change_password_done")
+
+# def ChangePasswordView(req):
+#     if req.method == "GET":
+#         return render(req, "registration/changepassword_form.html")
+#     elif req.method == "POST":
+#         form = ChangePasswordForm(req.POST)
+
+#         if form.is_valid():
+#             form.check_old_password(req)
+#             form.set_new_password(req)
+#             return redirect("accounts:change_password_done")
+
+class ChangePasswordView(FormView):
+    template_name = "registration/changepassword_form.html"
+    form_class = PasswordChangeForm
+    success_url = "/accounts/change-password/done/"
+
+    
+
+
 
 
 class ChangePasswordDoneView(TemplateView):
