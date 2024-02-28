@@ -7,5 +7,5 @@ class SkillsSerializer(serializers.ModelSerializer):
    '''
    class Meta:
       model = Skills
-      fields = ["id", "name"] 
+      fields = ["id", "name","percent"] 
   
