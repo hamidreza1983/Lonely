@@ -1,13 +1,9 @@
-from django.urls import path, include
-from .views import *
-
-from rest_framework.routers import DefaultRouter
+from django.urls import path
+from .views import PortfolioListView, PortfolioDetailView
 
 app_name = 'api-v1'
 
-router = DefaultRouter()
-router.register('portfolios', PortfolioView, basename='portfolios')
-router.register('category', CategoryView, basename='category')
-
-urlpatterns = router.urls
-
+urlpatterns = [
+    path("portfolio/", PortfolioListView.as_view(), name='portfolio-list'),
+    path("portfolio/<int:pk>/", PortfolioDetailView.as_view(), name='portfolio-detail'),
+]

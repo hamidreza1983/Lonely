@@ -1,3 +1,6 @@
-from django.shortcuts import render
-def home(request, *args, **kwargs):
-    return render(request, "home/index.html")
+
+from django.views.generic import TemplateView
+from portfolio.models import Portfolio,Category
+class HomeView(TemplateView):
+    template_name = 'home/index.html'
+    model=[Portfolio,Category]
