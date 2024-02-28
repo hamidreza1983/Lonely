@@ -7,3 +7,4 @@ from acounts.api.V1.views.ResetpasswordEmailView import ResetPasswordEmailView
 from acounts.api.V1.views.ResetPasswordView import ResetPasswordView
 from acounts.api.V1.views.ResendEmailView import ResendEmailView
 from acounts.api.V1.views.customejwtview import Customejwtview
+from acounts.api.V1.views.SendSMSToken import Send_SMS

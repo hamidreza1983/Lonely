@@ -6,6 +6,7 @@ from django.contrib.auth.admin import UserAdmin
 class CustomeUserAdmin(UserAdmin):
     list_display = (
         "email",
+        "phone",
         "is_staff",
         "is_active",
         "is_superuser",
@@ -16,7 +17,7 @@ class CustomeUserAdmin(UserAdmin):
     ordering = ("email",)
 
     fieldsets = (
-        ("Basic data", {"fields": ("email", "username", "password")}),
+        ("Basic data", {"fields": ("email",'phone' , "username", "password")}),
         (
             "Permissions",
             {
@@ -37,7 +38,7 @@ class CustomeUserAdmin(UserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "username", "password1", "password2"),
+                "fields": ("email", "phone", "username", "password1", "password2"),
             },
         ),
     )

@@ -19,12 +19,12 @@ from acounts.api.V1.views import (
 app_name = "api-v1-accounts"
 
 urlpatterns = [
-    path("registration/", RegistrationView.as_view(), name="registration"),
+    path("registration/<str:token>", RegistrationView.as_view(), name="registration"),
     path("token/login/", CustomeObtainAuthToken.as_view(), name="login"),
     path("token/logout/", DestroyAuthToken.as_view(), name="logout"),
     path("change-password/", ChangePasswordView.as_view(), name="change-password"),
     path("is-verified/<str:token>", IsVerifiedView.as_view(), name="is-verification"),
-    path("resend/", ResendEmailView.as_view(), name="resend"),
+    path("resend/<str:token>", ResendEmailView.as_view(), name="resend"),
     path(
         "reset-password-email/",
         ResetPasswordEmailView.as_view(),

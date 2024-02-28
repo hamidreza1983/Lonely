@@ -2,12 +2,10 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
-from mail_templated import EmailMessage
 from rest_framework_simplejwt.tokens import RefreshToken
-from ....multi_threading import SendEmailWithThreading
 from acounts.api.V1.serializer import RegisterationSerializer
 from acounts.models import CustomeUser
-
+from acounts.api.V1.views.SendSMSToken import Send_SMS
 
 class RegistrationView(GenericAPIView):
     '''
@@ -24,17 +22,15 @@ class RegistrationView(GenericAPIView):
         if serializer.is_valid():
             serializer.save()
             user = get_object_or_404(
-                CustomeUser, email=serializer.validated_data["email"]
+                CustomeUser, phone =serializer.validated_data["phone"]
             )
             token = self.get_tokens_for_user(user)
-            message = EmailMessage(
-                "email/email.html",
-                {"token": token},
-                "negin@gmail.com",
-                to=[serializer.validated_data["email"]],
-            )
-            email = SendEmailWithThreading(message)
-            email.start()
+            message = f'''
+                        کاربر عزیز با لینک زیر هویت خود را تایید کنید حواستم جمع کن پنل گرونه
+                                http://127.0.0.1:8000/acounts/api/V1/registration/{token}    
+                                    '''
+            to=[serializer.validated_data["phone"]]
+            Send_SMS(to, message)
             return Response({"detail": "email sent for your verification...!"})
 
             # print (serializer.validated_data)

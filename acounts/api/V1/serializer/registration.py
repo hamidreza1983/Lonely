@@ -12,7 +12,7 @@ class RegisterationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomeUser
-        fields = ["email", "username", "password", "password1"]
+        fields = ["phone", "username", "password", "password1"]
 
     def validate(self, attrs):
         '''here we validate user passwords'''
