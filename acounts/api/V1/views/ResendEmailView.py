@@ -4,15 +4,17 @@ from mail_templated import EmailMessage
 from rest_framework_simplejwt.tokens import RefreshToken
 from acounts.api.V1.serializer import (
     ResendEmailSerializer,
-)              
+)
 from acounts.multi_threading import SendEmailWithThreading
 
+
 class ResendEmailView(GenericAPIView):
-    '''Resend Email  to user  for verification '''
+    """Resend Email  to user  for verification"""
+
     serializer_class = ResendEmailSerializer
 
     def post(self, request, *args, **kwargs):
-        ''' This method is used to resend email to user  for verification '''
+        """This method is used to resend email to user  for verification"""
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]

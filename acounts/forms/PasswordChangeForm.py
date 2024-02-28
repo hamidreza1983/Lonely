@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.exceptions import ValidationError
+
+
 class PasswordChangeForm(SetPasswordForm):
     """
     A form that lets a user change their password by entering their old

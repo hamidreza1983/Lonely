@@ -4,7 +4,7 @@ from mail_templated import EmailMessage
 from rest_framework_simplejwt.tokens import RefreshToken
 from acounts.api.V1.serializer import (
     ResetPasswordEmailSerializer,
-)              
+)
 from acounts.multi_threading import SendEmailWithThreading
 
 
