@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from .models import CustomeUser
 # from django.contrib.auth.password_validation import validate_password
 # from django.core import exceptions
@@ -262,7 +262,7 @@ UserModel = get_user_model()
 
 
 
-class SetPasswordForm(forms.Form):
+
     """
     A form that lets a user set their password without entering the old
     password
