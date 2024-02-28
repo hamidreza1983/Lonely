@@ -13,7 +13,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
-
+from django.template import loader
 
 class CustomUserCreation(UserCreationForm):
 
