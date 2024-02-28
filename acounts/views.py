@@ -6,7 +6,8 @@ from .forms import (
     AuthenticationForm,
     CustomUserCreation,
     PasswordChangeForm, 
-    PasswordResetForm
+    ResetpasswordEmail,
+    ResetpasswordConfirm
 )
 # from .models import CustomeUser
 from django.views.generic import (
@@ -18,10 +19,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
 from mail_templated import EmailMessage
 from .multi_threading import SendEmailWithThreading
-from django.contrib.auth.views import PasswordContextMixin
-from django.contrib.auth.forms import SetPasswordForm
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.password_validation import validate_password
+from django.core import exceptions
 
 
 class LoginView(FormView):
@@ -67,10 +67,11 @@ class SignUpView(CreateView):
 
 
 
-class ChangePasswordView(FormView):
+class ChangePasswordView(LoginRequiredMixin, FormView):
     template_name = "registration/changepassword_form.html"
     form_class = PasswordChangeForm
     success_url = "/accounts/change-password/done/"
+    
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -93,8 +94,8 @@ class ChangePasswordDoneView(TemplateView):
 
 
 
-class PasswordResetView(PasswordContextMixin,FormView):
-    form_class = PasswordResetForm
+class PasswordResetView(FormView):
+    form_class = ResetpasswordEmail
     success_url = "/accounts/resetPassword/done/"
     template_name = "registration/resetpassword_form.html"
 
@@ -154,11 +155,31 @@ class ResetPasswordDoneView(TemplateView):
 #     #     password = kwargs.get('password')
 
 
-class PasswordResetConfirmView(PasswordContextMixin, FormView):
-    form_class = SetPasswordForm
-    
+class PasswordResetConfirmView(FormView):
+    form_class = ResetpasswordConfirm
     success_url = "/accounts/reset/done"
     template_name = "registration/resetpassword_confirm.html"
+
+    def form_valid(self, form):
+        user_data = AccessToken(self.kwargs.get("token"))
+        user_id = user_data["user_id"]
+        user = get_object_or_404(CustomeUser, id=user_id)
+        password1 = self.request.get("new_password1")
+        password2 = self.request.get("new_password2")
+
+        if password1 != password2:
+            raise ValidationError({"detail": "password dose not confirmed"})
+
+        try:
+
+            validate_password(password1)
+
+        except exceptions.ValidationError as e:
+
+            raise serializers.ValidationError({"detail": list(e.messages)})
+        
+        user.set_password(password1)
+        return super().form_valid(form)
     
    
 
