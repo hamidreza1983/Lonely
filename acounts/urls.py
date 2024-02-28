@@ -15,13 +15,13 @@ urlpatterns = [
         name="change_password_done",
     ),
     path(
-        "ResetPassword/", ResetPasswordView.as_view(), name="reset_password"
+        "resetPassword/", ResetPasswordView.as_view(), name="reset_password"
     ),
     path(
-        "ResetPassword/done/",
+        "resetPassword/done/",
         ResetPasswordView.as_view(),
         name="reset_password_done",
     ),
-    path("Reset/<str:token>", ResetView, name="reset"),
-    path("Reset/done", ResetDoneView.as_view(), name="reset_done"),
+    path("reset/<str:token>", ResetView, name="reset"),
+    path("reset/done", ResetDoneView.as_view(), name="reset_done"),
 ]
