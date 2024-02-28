@@ -7,6 +7,9 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 
 class PasswordResetConfirmView(FormView):
+    '''
+    Setting new passwords for user of email
+    '''
     form_class = ResetpasswordConfirm
     success_url = "/accounts/reset/done/"
     template_name = "registration/resetpassword_confirm.html"
