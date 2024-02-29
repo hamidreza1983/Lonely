@@ -1,10 +1,10 @@
-from melipayamak_python_master.melipayamak import Api
+from melipayamak import Api
 import os
 
 
 def Send_SMS(phone, message):
-    username = os.environ.get('SMS_USERNAME')
-    password = os.environ.get('SMS_PASSWORD')
+    username = 'SMS_USERNAME'
+    password = 'SMS_PASSWORD'
     api = Api('989100536456', 'b1g8e49')
     sms = api.sms()
     to = phone[0]
