@@ -17,6 +17,7 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogOutView.as_view(), name="logout"),
     path("signup/", SignUpView.as_view(), name="signup"),
+    # path("api/V1/", include("acounts.api.V1.urls")),
     path("api/V2/", include("acounts.api.V2.urls")),
     path(
         "change-password/",
