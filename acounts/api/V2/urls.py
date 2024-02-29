@@ -16,7 +16,7 @@ from acounts.api.V2.views import (
 )
 
 
-app_name = "api-v1-accounts"
+app_name = "api-v2-accounts"
 
 urlpatterns = [
     path("registration/", RegistrationView.as_view(), name="registration"),
